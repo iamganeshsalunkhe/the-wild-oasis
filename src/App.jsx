@@ -1,16 +1,32 @@
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import GlobalStyles from './styles/GlobalStyles';
-import Heading from './ui/Heading';
-import Input from './ui/Input';
-function App() {
+import Dashboard from "./pages/Dashboard";
+import Bookings from "./pages/Bookings";
+import Cabins from "./pages/Cabins";
+import Users from "./pages/Users";
+import Account from "./pages/Account";
+import Settings from "./pages/Settings";
+import Login from "./pages/PageNotFound";
+import PageNotFound from "./pages/PageNotFound";
 
+
+function App() {
   return (
     <>
-      <GlobalStyles />
-      <Heading as='h1'>The wild oasis</Heading>
-      <Heading as='h2'>The check in and check out</Heading>
-
-      <Input type="number" placeholder="Number of guests" />
-      <Heading as='h3'>Form</Heading>
+    <GlobalStyles />
+    <BrowserRouter>
+      <Routes>
+        <Route index element={<Navigate replace to='dashboard'/>} />
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="bookings" element={<Bookings />} />
+        <Route path="cabins" element={<Cabins />} />
+        <Route path="users" element={<Users />} />
+        <Route path="account" element={<Account />} />
+        <Route path="settings" element={<Settings />} />
+        <Route path="login" element={<Login />} />
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
+    </BrowserRouter>
     </>
   );
 }
