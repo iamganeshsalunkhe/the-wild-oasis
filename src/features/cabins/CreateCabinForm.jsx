@@ -66,7 +66,9 @@ function CreateCabinForm() {
 
 
   function onSubmit(data){
-    mutate(data)
+
+    console.log(data)
+     mutate({...data, image:data.image[0]})
   }
 
   function onError (errors){
@@ -79,6 +81,7 @@ function CreateCabinForm() {
         <Input
           type="text"
           id="name"
+          disabled={isCreating}
           {...register("name", {
             required: "This field is required",
           })}
@@ -91,6 +94,7 @@ function CreateCabinForm() {
         <Input
           type="number"
           id="maxCapacity"
+          disabled={isCreating}
           {...register("maxCapacity", {
             required: "This field is required",
             min: {
@@ -99,7 +103,9 @@ function CreateCabinForm() {
             },
           })}
         />
-        {errors?.maxCapacity?.message && <Error>{errors.maxCapacity.message}</Error>}
+        {errors?.maxCapacity?.message && (
+          <Error>{errors.maxCapacity.message}</Error>
+        )}
       </FormRow>
 
       <FormRow>
@@ -107,11 +113,14 @@ function CreateCabinForm() {
         <Input
           type="number"
           id="regularPrice"
+          disabled={isCreating}
           {...register("regularPrice", {
             required: "This field is required",
           })}
         />
-        {errors?.regularPrice?.message && <Error>{errors.regularPrice.message}</Error>}
+        {errors?.regularPrice?.message && (
+          <Error>{errors.regularPrice.message}</Error>
+        )}
       </FormRow>
 
       <FormRow>
@@ -119,13 +128,16 @@ function CreateCabinForm() {
         <Input
           type="number"
           id="discounts"
+          disabled={isCreating}
           defaultValue={0}
           {...register("discounts", {
             required: "This field is required",
-            validate: (value) => value < getValues().regularPrice,
+            validate: (value) => value <= getValues().regularPrice,
           })}
         />
-        {errors?.discounts?.message && <Error>{errors.discounts.message}</Error>}
+        {errors?.discounts?.message && (
+          <Error>{errors.discounts.message}</Error>
+        )}
       </FormRow>
 
       <FormRow>
@@ -133,22 +145,31 @@ function CreateCabinForm() {
         <Textarea
           type="text"
           id="description"
+          disabled={isCreating}
           defaultValue=""
           {...register("description", {
             required: "This field is required",
           })}
         />
-        {errors?.description?.message && <Error>{errors.description.message}</Error>}
+        {errors?.description?.message && (
+          <Error>{errors.description.message}</Error>
+        )}
       </FormRow>
 
       <FormRow>
         <Label htmlFor="image">Cabin photo</Label>
-        <FileInput id="image" accept="image/*" />
+        <FileInput
+          id="image"
+          accept="image/*"
+          {...register("image", {
+            required: "This field is required",
+          })}
+        />
       </FormRow>
 
       <FormRow>
         {/* type is an HTML attribute! */}
-        <Button variation="secondary" type="reset">
+        <Button variation="secondary" type="reset" disabled={isCreating}>
           Cancel
         </Button>
         <Button disabled={isCreating} variation="primary">
