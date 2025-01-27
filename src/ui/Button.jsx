@@ -35,8 +35,7 @@ const variations = {
     border: 1px solid var(--color-grey-200);
 
     &:hover {
-      color:var(--color-grey-50);
-      background-color: var(--color-grey-600);
+      background-color: var(--color-grey-50);
     }
   `,
   danger: css`
@@ -58,9 +57,9 @@ const Button = styled.button`
   ${(props) => variations[props.variation]}
 `;
 
-Button.defaultProps={
-  variations:'primary',
-  size:'medium'
-}
+Button.defaultProps = {
+  variation: "primary",
+  size: "medium",
+};
 
 export default Button;
