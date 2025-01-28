@@ -4,6 +4,7 @@ import Modal from "../../ui/Modal";
 
 function AddCabin() {
   return (
+  
     <Modal>
       <Modal.Open opens="cabin-form">
         <Button>Add new cabin</Button>
