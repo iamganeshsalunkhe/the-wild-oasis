@@ -38,6 +38,7 @@ const Discount = styled.div`
 `;
 
 function CabinRow({cabin}) {
+  console.log(cabin)
   const {id:cabinId, name, maxCapacity, regularPrice, discounts,image, description}= cabin;
   const {isDeleting,deleteCabin} = useDeleteCabin();
 
